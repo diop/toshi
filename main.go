@@ -96,7 +96,7 @@ func main() {
 	// Routes
 	e.GET("/", renderHome)
 	e.POST("/help", getHelp)
-	e.POST("/messages", receiveMessage)
+	e.GET("/messages", replyToMessage)
 	e.GET("/wallets", getWalletAddress)
 	e.POST("/wallets", createWallet)
 	e.GET("/users", getBalance)
