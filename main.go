@@ -26,6 +26,26 @@ type message struct {
 }
 
 // Handlers
+func receiveMessage(c echo.Context) error {
+	return c.String(http.StatusOK, "The Toshitext service is listening to your commands.")
+}
+
+func getHelp(c echo.Context) error {
+	return c.String(http.StatusOK, "Here's the list of available commands:...")
+}
+
+func renderHome(c echo.Context) error {
+	return c.String(http.StatusOK, "Toshitext v1 - Send crypto with a text message.")
+}
+
+func getBalance(c echo.Context) error {
+	return c.String(http.StatusOK, "Here's your wallet total balance: $100")
+}
+
+func getWalletAddress(c echo.Context) error {
+	return c.String(http.StatusOK, "Here's your wallet deposit address: 0x50Ebe9ad50DCf1Be1A35570E29587fa9F6eCDB46")
+}
+
 func replyToMessage(c echo.Context) error {
 	plivoAuthId := os.Getenv("PLIVO_AUTH_ID")
 	plivoAuthToken := os.Getenv("PLIVO_AUTH_TOKEN")
@@ -46,22 +66,6 @@ func replyToMessage(c echo.Context) error {
 
 	fmt.Println("Response: %#v\n", response)
 	return c.String(http.StatusOK, "We have successfully sent the message!")
-}
-
-func receiveMessage(c echo.Context) error {
-	return c.String(http.StatusOK, "The Toshitext service is listening to your commands.")
-}
-
-func getHelp(c echo.Context) error {
-	return c.String(http.StatusOK, "Here's the list of available commands:...")
-}
-
-func renderHome(c echo.Context) error {
-	return c.String(http.StatusOK, "Toshitext v1 - Send crypto with a text message.")
-}
-
-func getBalance(c echo.Context) error {
-	return c.String(http.StatusOK, "Here's your wallet total balance: $100")
 }
 
 func createWallet(c echo.Context) error {
@@ -89,10 +93,6 @@ func createWallet(c echo.Context) error {
 	hash.Write(publicKeyBytes[1:])
 	fmt.Println(hexutil.Encode(hash.Sum(nil)[12:])) // 0x96216849c49358b10257cb55b28ea603c874b05e
 
-	return c.String(http.StatusOK, "Here's your wallet deposit address: 0x50Ebe9ad50DCf1Be1A35570E29587fa9F6eCDB46")
-}
-
-func getWalletAddress(c echo.Context) error {
 	return c.String(http.StatusOK, "Here's your wallet deposit address: 0x50Ebe9ad50DCf1Be1A35570E29587fa9F6eCDB46")
 }
 
