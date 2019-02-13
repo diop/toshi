@@ -6,6 +6,8 @@ require (
 	github.com/facebookgo/httpdown v0.0.0-20180706035922-5979d39b15c2 // indirect
 	github.com/facebookgo/stats v0.0.0-20151006221625-1b76add642e4 // indirect
 	github.com/google/go-querystring v1.0.0 // indirect
+	github.com/jinzhu/gorm v1.9.2
+	github.com/jinzhu/inflection v0.0.0-20180308033659-04140366298a // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/gommon v0.2.8 // indirect

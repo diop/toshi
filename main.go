@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -9,6 +10,14 @@ import (
 	"github.com/labstack/echo"
 	plivo "github.com/plivo/plivo-go"
 )
+
+type message struct {
+	ID          int    `json:"id"`
+	Sender      string `json:"sender"`
+	MessageTime string `json:"messageTime"`
+	Text        string `json:"text"`
+	Receiver    string `json:"receiver"`
+}
 
 // Handlers
 func replyToMessage(c echo.Context) error {
@@ -58,12 +67,6 @@ func getWalletAddress(c echo.Context) error {
 }
 
 func main() {
-	// Initialize godotenv for reading secrets stored in .env files.
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	log.Fatal("Error loading .env file")
-	// }
-
 	e := echo.New()
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -72,6 +75,23 @@ func main() {
 
 	// Set up Echo, configure server side validation, and hook into middleware.
 	e.Server.Addr = ":" + port
+
+	// Taking in JSON and mapping it to our data structure.
+	jsn := `[{"ID":"id","Sender":"sender","MessageTime":"messageTime","Receiver":"receiver","Text":"text"}]`
+
+	// MDR -> Message Detail Records
+	details := []message{}
+	fmt.Printf("Go data: %+v\n", details)
+
+	err := json.Unmarshal([]byte(jsn), &details)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("Go data: %+v\n", details)
+
+	for i, v := range details {
+		fmt.Println(i, v)
+	}
 
 	// Routes
 	e.GET("/", renderHome)
