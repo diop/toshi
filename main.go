@@ -68,7 +68,7 @@ func getWalletAddress(c echo.Context) error {
 
 func main() {
 	e := echo.New()
-	port := os.Getenv("process.env.PORT")
+	port := os.Getenv("PORT")
 	if port == "" {
 		e.Logger.Fatal("$PORT must be set")
 	}
