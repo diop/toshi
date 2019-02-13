@@ -2,12 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 
 	"github.com/facebookgo/grace/gracehttp"
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	plivo "github.com/plivo/plivo-go"
 )
@@ -61,10 +59,10 @@ func getWalletAddress(c echo.Context) error {
 
 func main() {
 	// Initialize godotenv for reading secrets stored in .env files.
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal("Error loading .env file")
+	// }
 
 	e := echo.New()
 	port := os.Getenv("PORT")
